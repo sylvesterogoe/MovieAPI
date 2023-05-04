@@ -20,6 +20,9 @@ type config struct {
 	env  string
 	db   struct {
 		dsn string
+		maxOpenConns int
+		maxIdleConns int
+		maxConnIdleTime string
 	}
 }
 
@@ -34,6 +37,11 @@ func main() {
 	flag.IntVar(&cfg.port, "port", 4000, "API server port")
 	flag.StringVar(&cfg.env, "env", "development", "Environment (development|staging|production)")
 	flag.StringVar(&cfg.db.dsn, "db-dsn", "postgres://starlet:pa55word@localhost/starlet?sslmode=disable", "PostgreSQL DSN")
+
+	flag.IntVar(&cfg.db.maxOpenConns, "maxOpenConns", 25, "PostgreSQL DSN")
+	flag.IntVar(&cfg.db.maxIdleConns, "maxIdleConns", 25, "PostgreSQL DSN")
+	flag.StringVar(&cfg.db.maxConnIdleTime, "maxConnIdleTime", "15m", "PostgreSQL DSN")
+
 	flag.Parse()
 
 	logger := log.New(os.Stdout, "", log.Ldate|log.Ltime)
@@ -73,6 +81,15 @@ func openDB(cfg config) (*sql.DB, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	db.SetMaxOpenConns(cfg.db.maxOpenConns)
+	db.SetMaxIdleConns(cfg.db.maxIdleConns)
+
+	duration, err := time.ParseDuration(cfg.db.maxConnIdleTime)
+	if err != nil{
+		return nil, err
+	}
+	db.SetConnMaxIdleTime(duration)
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
