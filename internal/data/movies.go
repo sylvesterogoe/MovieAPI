@@ -47,12 +47,12 @@ func (m MovieModel) Get(id int64) (*Movie, error) {
 	var movie Movie
 
 	args := []interface{}{
-		&movie.ID, 
-		&movie.CreatedAt, 
-		&movie.Title, 
+		&movie.ID,
+		&movie.CreatedAt,
+		&movie.Title,
 		&movie.Year,
-		&movie.Runtime, 
-		pq.Array(&movie.Genres), 
+		&movie.Runtime,
+		pq.Array(&movie.Genres),
 		&movie.Version}
 
 	err := m.DB.QueryRow(query, id).Scan(args...)
@@ -71,7 +71,7 @@ func (m MovieModel) Get(id int64) (*Movie, error) {
 }
 
 func (m MovieModel) Update(movie *Movie) error {
-	query := 
+	query :=
 		`UPDATE movies
 		SET title = $1, year = $2, runtime = $3, genres = $4, version = version + 1
 		WHERE id = $5
@@ -89,6 +89,24 @@ func (m MovieModel) Update(movie *Movie) error {
 }
 
 func (m MovieModel) Delete(id int64) error {
+	query :=
+		`DELETE FROM movies
+		WHERE id = $1`
+
+	result, err := m.DB.Exec(query, id)
+	if err != nil {
+		return err
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return err
+	}
+
+	if rowsAffected == 0 {
+		return ErrRecordNotFound
+	}
+
 	return nil
 }
 
