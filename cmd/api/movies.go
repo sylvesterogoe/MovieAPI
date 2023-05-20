@@ -9,6 +9,32 @@ import (
 	"starlet.sylvester.net/internal/validator"
 )
 
+
+func (app *application) listMoviesHandler(w http.ResponseWriter, r *http.Request) {
+	var input struct {
+		Title    string
+		Genres   []string
+		Page     int
+		PageSize int
+		Sort     string
+	}
+	
+	v := validator.New()
+	qs := r.URL.Query()
+	
+	input.Title = app.readString(qs, "title", "")
+	input.Genres = app.readCSV(qs, "genres", []string{})
+	input.Page = app.readInt(qs, "page", 1, v)
+	input.PageSize = app.readInt(qs, "page_size", 20, v)
+	input.Sort = app.readString(qs, "sort", "id")
+
+	if !v.Valid() {
+		app.failedValidationResponse(w, r, v.Errors)
+		return
+	}
+	fmt.Fprintf(w, "%+v\n", input)
+}
+
 func (app *application) showMovieHandler(w http.ResponseWriter, r *http.Request) {
 	id, err := app.readIDParam(r)
 	if err != nil {
@@ -110,14 +136,14 @@ func (app *application) updateMovieHandler(w http.ResponseWriter, r *http.Reques
 		movie.Title = *input.Title
 	}
 
-	if input.Year != nil{
+	if input.Year != nil {
 		movie.Year = *input.Year
 	}
-	if input.Runtime != nil{
+	if input.Runtime != nil {
 		movie.Runtime = *input.Runtime
 	}
 
-	if input.Genres != nil{
+	if input.Genres != nil {
 		movie.Genres = input.Genres
 	}
 
