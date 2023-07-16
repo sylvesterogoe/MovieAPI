@@ -3,6 +3,9 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
 	"time"
 )
 
@@ -14,6 +17,18 @@ func (app *application) serve() error {
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 30 * time.Second,
 	}
+
+	go func() {
+		quit := make(chan os.Signal, 1)
+
+		signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+
+		sig := <-quit
+		
+		app.logger.PrintInfo("caught signal", map[string]string{"signal": sig.String()})
+
+		os.Exit(0)
+	}()
 
 	app.logger.PrintInfo("starting server", map[string]string{
 		"addr": srv.Addr,
