@@ -61,7 +61,7 @@ func main() {
 		models: data.NewModels(db),
 	}
 
-	err = app.Serve()
+	err = app.serve()
 	if err != nil {
 	logger.PrintFatal(err, nil)
 	}
