@@ -9,7 +9,7 @@ import (
 
 	_ "github.com/lib/pq"
 	"starlet.sylvester.net/internal/data"
-	"starlet.sylvester.net/internal/jsonlog"
+	"github.com/sylvesterogoe/jsonlog"
 )
 
 const version = "1.0.0"

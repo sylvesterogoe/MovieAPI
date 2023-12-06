@@ -11,7 +11,7 @@ import (
 	"strings"
 
 	"github.com/julienschmidt/httprouter"
-	"starlet.sylvester.net/internal/validator"
+	"github.com/sylvesterogoe/validator"
 )
 
 func (app *application) readIDParam(r *http.Request) (int64, error) {

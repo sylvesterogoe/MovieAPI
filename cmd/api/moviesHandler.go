@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/sylvesterogoe/validator"
 	"starlet.sylvester.net/internal/data"
-	"starlet.sylvester.net/internal/validator"
 )
 
 func (app *application) listMoviesHandler(w http.ResponseWriter, r *http.Request) {

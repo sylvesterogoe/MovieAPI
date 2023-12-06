@@ -3,8 +3,7 @@ package data
 import (
 	"math"
 	"strings"
-
-	"starlet.sylvester.net/internal/validator"
+	"github.com/sylvesterogoe/validator"
 )
 
 type Metadata struct {

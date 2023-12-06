@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/lib/pq"
-	"starlet.sylvester.net/internal/validator"
+	"github.com/sylvesterogoe/validator"
 )
 
 type Movie struct {
