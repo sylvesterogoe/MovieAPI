@@ -6,5 +6,7 @@ github.com/sylvesterogoe/jsonlog v0.0.0-20231206194259-c94bf021440f h1:Cm1epQhE7
 github.com/sylvesterogoe/jsonlog v0.0.0-20231206194259-c94bf021440f/go.mod h1:i3FErLH9WI3I/BAUhxBQ/Zh9nxdRCsCYOFYn0X28H3M=
 github.com/sylvesterogoe/validator v0.0.0-20231206193955-eac9bfc4a6da h1:8jMKxYxhRg5ek7En4CIBO/sfivV/g0wOhLFuWlZaRYY=
 github.com/sylvesterogoe/validator v0.0.0-20231206193955-eac9bfc4a6da/go.mod h1:VEX286fZ4+5Je+bDdlA0cD0rvovBXpQxoYep/bk+DEU=
+golang.org/x/crypto v0.17.0 h1:r8bRNjWL3GshPW3gkd+RpvzWrZAwPS49OmTGZ/uhM4k=
+golang.org/x/crypto v0.17.0/go.mod h1:gCAAfMLgwOJRpTjQ2zCCt2OcSfYMTeZVSRtQlPC7Nq4=
 golang.org/x/time v0.3.0 h1:rg5rLMjNzMS1RkNLzCG38eapWhnYLFYXDXj2gOlr8j4=
 golang.org/x/time v0.3.0/go.mod h1:tRJNPiyCQ0inRvYxbN9jk5I+vvW/OXSQhTDSoE431IQ=

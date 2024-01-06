@@ -11,3 +11,5 @@ require (
 	github.com/sylvesterogoe/validator v0.0.0-20231206193955-eac9bfc4a6da
 	golang.org/x/time v0.3.0
 )
+
+require golang.org/x/crypto v0.17.0
