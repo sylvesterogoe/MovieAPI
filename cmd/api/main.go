@@ -4,7 +4,6 @@ import (
 	"context"
 	"database/sql"
 	"flag"
-	"fmt"
 	"os"
 	"sync"
 	"time"
@@ -70,9 +69,6 @@ func main() {
 	flag.StringVar(&cfg.smtp.sender, "smtp-sender", "Starlet <starletteam@gmail.com>", "SMTP sender")
 
 	flag.Parse()
-	fmt.Println(os.Getenv("STARLET_DB_DSN"))
-	fmt.Println(os.Getenv("STARLET_SMTP_USERNAME"))
-	fmt.Println(os.Getenv("STARLET_SMTP_PASSWORD"))
 
 	logger := jsonlog.New(os.Stdout, jsonlog.LevelInfo)
 
